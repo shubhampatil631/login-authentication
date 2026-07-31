@@ -1,0 +1,12 @@
+# Database persistent volume data
+db_data/
+
+# IDE configs
+.idea/
+.vscode/
+
+# OS generated files
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+.DS_Store
