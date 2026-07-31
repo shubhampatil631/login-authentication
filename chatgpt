@@ -1,0 +1,303 @@
+Great. We'll build it step by step as a **professional PHP + MySQL CRUD Project**.
+
+**Project Name:** Student Management System
+
+### Features
+
+* Login Authentication
+* Register User
+* Logout
+* Session Authentication
+* Dashboard
+* Add Student
+* View Students
+* Edit Student
+* Delete Student
+* Search Student
+* Bootstrap 5 UI
+* Prepared Statements
+* SQL Injection Protection
+
+---
+
+# PART 1
+
+## Folder Structure
+
+```text
+Student-Management-System/
+│
+├── assets/
+│   ├── css/
+│   │      style.css
+│   └── js/
+│          script.js
+│
+├── config/
+│      database.php
+│      auth.php
+│
+├── includes/
+│      header.php
+│      navbar.php
+│      footer.php
+│
+├── register.php
+├── login.php
+├── logout.php
+├── dashboard.php
+│
+├── students.php
+├── add_student.php
+├── edit_student.php
+├── delete_student.php
+│
+└── database.sql
+```
+
+---
+
+# Step 1 Create Database
+
+Open phpMyAdmin
+
+Create Database
+
+```
+student_management
+```
+
+---
+
+# database.sql
+
+```sql
+CREATE DATABASE student_management;
+
+USE student_management;
+
+CREATE TABLE users (
+
+id INT AUTO_INCREMENT PRIMARY KEY,
+
+name VARCHAR(100) NOT NULL,
+
+email VARCHAR(100) UNIQUE NOT NULL,
+
+password VARCHAR(255) NOT NULL,
+
+created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+
+);
+
+CREATE TABLE students (
+
+id INT AUTO_INCREMENT PRIMARY KEY,
+
+name VARCHAR(100),
+
+email VARCHAR(100),
+
+phone VARCHAR(20),
+
+course VARCHAR(100),
+
+city VARCHAR(100),
+
+created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+
+);
+```
+
+Import this SQL.
+
+---
+
+# config/database.php
+
+```php
+<?php
+
+$host="localhost";
+$user="root";
+$password="";
+$database="student_management";
+
+$conn=mysqli_connect($host,$user,$password,$database);
+
+if(!$conn){
+    die("Database Connection Failed");
+}
+
+?>
+```
+
+---
+
+# config/auth.php
+
+```php
+<?php
+
+session_start();
+
+if(!isset($_SESSION['user_id']))
+{
+    header("Location: login.php");
+    exit();
+}
+
+?>
+```
+
+---
+
+# includes/header.php
+
+```php
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Student Management System</title>
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+<link rel="stylesheet" href="assets/css/style.css">
+
+</head>
+
+<body>
+
+<div class="container mt-5">
+```
+
+---
+
+# includes/navbar.php
+
+```php
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark mb-4">
+
+<div class="container-fluid">
+
+<a class="navbar-brand" href="dashboard.php">
+
+Student Management
+
+</a>
+
+<div>
+
+<a href="dashboard.php" class="btn btn-success btn-sm">
+
+Dashboard
+
+</a>
+
+<a href="students.php" class="btn btn-primary btn-sm">
+
+Students
+
+</a>
+
+<a href="logout.php" class="btn btn-danger btn-sm">
+
+Logout
+
+</a>
+
+</div>
+
+</div>
+
+</nav>
+```
+
+---
+
+# includes/footer.php
+
+```php
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+<script src="assets/js/script.js"></script>
+
+</body>
+
+</html>
+```
+
+---
+
+# assets/css/style.css
+
+```css
+body{
+
+background:#f4f4f4;
+
+}
+
+.card{
+
+border-radius:12px;
+
+box-shadow:0px 0px 12px rgba(0,0,0,.2);
+
+}
+```
+
+---
+
+# assets/js/script.js
+
+```javascript
+console.log("Student Management System");
+```
+
+---
+
+# Test Part 1
+
+Create the folders.
+
+Import **database.sql**
+
+Put project inside
+
+```
+htdocs/
+```
+
+Visit
+
+```
+http://localhost/Student-Management-System/
+```
+
+There won't be any pages yet because login and dashboard are created in the next part.
+
+---
+
+## Next (Part 2)
+
+We'll build the complete authentication system:
+
+* `register.php`
+* `login.php`
+* `logout.php`
+* `dashboard.php`
+* Password hashing with `password_hash()`
+* Secure login using `password_verify()`
+* Session management
+* Redirect protection
+* Login success/failure messages
+
+After that, we'll build the full CRUD module for students.
